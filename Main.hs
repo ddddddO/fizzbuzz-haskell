@@ -22,6 +22,7 @@ main = do
   -- print ret2
   -- print ret3
   -- print ret4
+  -- print ret5
 
   test [ret1, ret2, ret3, ret4, ret5]
 
@@ -33,7 +34,10 @@ test rets = do
   print "----------------"
   
   let passed = filter (==True) (zipWith (\a -> \b -> a == b) (init rets) (tail rets))
-  print (if length passed == (length rets) - 1 then "Ok!" else "Fail...")
+      judge actual expected
+        | actual == expected = "Ok!"
+        | otherwise = "Fail..."
+  print (judge (length passed) (length rets - 1))
 
 
 -- etc
