@@ -44,7 +44,7 @@ zipFizzBuzz numTupls fb =
         | num `mod` (fst fb) == 0 = snd fb
         | otherwise = ""
   in
-    map (\(num, msg) -> (num, (msg) ++ (judge (num)))) numTupls
+    map (\(num, msg) -> (num, msg ++ judge num)) numTupls
 
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
