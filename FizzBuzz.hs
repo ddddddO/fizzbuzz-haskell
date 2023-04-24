@@ -33,8 +33,7 @@ fizzBuzz' nums =
 --
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
-  let initializedTupls = zip nums (cycle [""])
-      fizzBuzz = zipFizzBuzz (zipFizzBuzz initializedTupls (3, "fizz")) (5, "buzz")
+  let fizzBuzz = zipFizzBuzz (zipFizzBuzz (zip nums (cycle [""])) (3, "fizz")) (5, "buzz")
       judge msg num
         | msg == "" = show num
         | otherwise = msg
@@ -43,8 +42,9 @@ fizzBuzz'' nums =
 
 zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
 zipFizzBuzz numTupls fb =
-  let judge num
-        | num `mod` (fst fb) == 0 = snd fb
+  let (fbNum, fbMsg) = fb
+      judge num
+        | num `mod` fbNum == 0 = fbMsg
         | otherwise = ""
   in
     map (\(num, msg) -> (num, msg ++ judge num)) numTupls
