@@ -32,15 +32,19 @@ fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   let initializedTupls = zip nums (cycle [""])
       fizzBuzz = zipFizzBuzz (zipFizzBuzz initializedTupls (3, "fizz")) (5, "buzz")
+      judge msg num
+        | msg == "" = show num
+        | otherwise = msg
   in
-    map (\tupl -> if snd tupl == "" then show (fst tupl) else snd tupl) fizzBuzz
+    map (\(num, msg) -> judge msg num) fizzBuzz
 
 zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
 zipFizzBuzz numTupls fb =
-  let fbNums = take (length numTupls) (cycle [fst fb])
+  let judge num
+        | num `mod` (fst fb) == 0 = snd fb
+        | otherwise = ""
   in
-    zipWith (\tupl -> \a -> (fst tupl, (snd tupl) ++ (if (fst tupl) `mod` a == 0 then snd fb else ""))) numTupls fbNums
-
+    map (\(num, msg) -> (num, (msg) ++ (judge (num)))) numTupls
 
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
@@ -51,14 +55,11 @@ fizzBuzz''' nums =
 
 data FBNum = FBNum Int String
 instance Show FBNum where
-  show (FBNum num msg) = if msg == "" then show num else msg
-getMsg :: FBNum -> String
-getMsg (FBNum _ msg) = msg
-getNum :: FBNum -> Int
-getNum (FBNum num _) = num
+  show (FBNum num "") = show num
+  show (FBNum _ msg)  = msg
 toFizzBuzz :: [FBNum] -> (Int, String) -> [FBNum]
 toFizzBuzz fbNums fb =
-  map (\a -> if getNum a `mod` (fst fb) == 0 then FBNum (getNum a) ((getMsg a) ++ (snd fb)) else a) fbNums
+  map (\(FBNum num msg) -> if num `mod` (fst fb) == 0 then FBNum num (msg ++ (snd fb)) else FBNum num msg) fbNums
 toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
 
