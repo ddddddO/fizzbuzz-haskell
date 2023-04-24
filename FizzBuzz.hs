@@ -6,6 +6,7 @@ module FizzBuzz
   , fizzBuzz''''
   ) where
 
+--
 fizzBuzz :: [Int] -> [String]
 fizzBuzz nums =
   let fizzBuzzNums = [a | a <- fizz nums, b <- buzz nums, a == b] -- [0,15,30,45]
@@ -23,11 +24,13 @@ fizz nums = [a | a <- nums, a `mod` 3 == 0]
 buzz nums = [a | a <- nums, a `mod` 5 == 0]
 
 
+--
 fizzBuzz' :: [Int] -> [String]
 fizzBuzz' nums =
   map (\a -> if a `mod` 15 == 0 then "fizzbuzz" else if a `mod` 3 == 0 then "fizz" else if a `mod` 5 == 0 then "buzz" else show a) nums
 
 
+--
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   let initializedTupls = zip nums (cycle [""])
@@ -46,6 +49,8 @@ zipFizzBuzz numTupls fb =
   in
     map (\(num, msg) -> (num, msg ++ judge num)) numTupls
 
+
+--
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
   let initializedNums = map (\a -> FBNum a "") nums
@@ -64,6 +69,7 @@ toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
 
 
+--
 fizzBuzz'''' :: [Int] -> [String]
 fizzBuzz'''' nums =
   let judge a
