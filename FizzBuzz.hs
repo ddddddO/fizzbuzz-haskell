@@ -7,18 +7,16 @@ module FizzBuzz
 
 fizzBuzz :: [Int] -> [String]
 fizzBuzz nums =
-  let fizzBuzzNums = [a | a <- fizz nums, b <- buzz nums, a == b]  -- [0,15,30,45]
-      fizzNums = [a | a <- fizz nums, not (a `elem` fizzBuzzNums)] -- [3,6,9,12,18,21,24,27,33,36,39,42,48]
-      buzzNums = [a | a <- buzz nums, not (a `elem` fizzBuzzNums)] -- [5,10,20,25,35,40,50]
+  let fizzBuzzNums = [a | a <- fizz nums, b <- buzz nums, a == b] -- [0,15,30,45]
+      fizzNums = [a | a <- fizz nums] -- [3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48]
+      buzzNums = [a | a <- buzz nums] -- [5,10,15,20,25,30,35,40,45,50]
+      judge a
+        | a `elem` fizzBuzzNums = "fizzbuzz"
+        | a `elem` fizzNums = "fizz"
+        | a `elem` buzzNums = "buzz"
+        | otherwise = show a
   in
-    [if a `elem` fizzBuzzNums
-      then "fizzbuzz"
-    else if a `elem` fizzNums
-      then "fizz"
-    else if a `elem` buzzNums
-      then "buzz"
-    else
-      show a | a <- nums]
+    [ judge a | a <- nums ]
 
 fizz nums = [a | a <- nums, a `mod` 3 == 0]
 buzz nums = [a | a <- nums, a `mod` 5 == 0]
