@@ -53,10 +53,7 @@ zipFizzBuzz numTupls fb =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  let initializedNums = map (\a -> FBNum a "") nums
-      fizzBuzz = toFizzBuzz (toFizzBuzz initializedNums (3, "fizz")) (5, "buzz")
-  in
-    toStrings fizzBuzz
+  toStrings (toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz"))
 
 data FBNum = FBNum Int String
 instance Show FBNum where
@@ -64,7 +61,12 @@ instance Show FBNum where
   show (FBNum _ msg)  = msg
 toFizzBuzz :: [FBNum] -> (Int, String) -> [FBNum]
 toFizzBuzz fbNums fb =
-  map (\(FBNum num msg) -> if num `mod` (fst fb) == 0 then FBNum num (msg ++ (snd fb)) else FBNum num msg) fbNums
+  let (fbNum, fbMsg) = fb
+      genFBNum num msg
+        | num `mod` fbNum == 0 = FBNum num (msg ++ fbMsg)
+        | otherwise = FBNum num msg
+  in
+    map (\(FBNum num msg) -> genFBNum num msg) fbNums
 toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
 

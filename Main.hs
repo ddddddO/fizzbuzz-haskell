@@ -37,6 +37,7 @@ test rets = do
       judge actual expected
         | actual == expected = "Ok!"
         | otherwise = "Fail..."
+
   print (judge (length passed) (length rets - 1))
 
 
