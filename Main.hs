@@ -16,13 +16,14 @@ main = do
       ret2 = fizzBuzz' nums
       ret3 = fizzBuzz'' nums
       ret4 = fizzBuzz''' nums
+      ret5 = fizzBuzz'''' nums
 
   print ret1
-  print ret2
-  print ret3
-  print ret4
+  -- print ret2
+  -- print ret3
+  -- print ret4
 
-  test [ret1, ret2, ret3, ret4]
+  test [ret1, ret2, ret3, ret4, ret5]
 
 
 test :: [[String]] -> IO()

@@ -58,7 +58,7 @@ getNum :: FBNum -> Int
 getNum (FBNum num _) = num
 toFizzBuzz :: [FBNum] -> (Int, String) -> [FBNum]
 toFizzBuzz fbNums fb =
-  map (\a -> if getNum a `mod` (fst fb) == 0 then FBNum (getNum a) ((getMsg a) ++ (snd fb)) else FBNum (getNum a) (getMsg a)) fbNums
+  map (\a -> if getNum a `mod` (fst fb) == 0 then FBNum (getNum a) ((getMsg a) ++ (snd fb)) else a) fbNums
 toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
 
