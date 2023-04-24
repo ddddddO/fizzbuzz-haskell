@@ -3,6 +3,7 @@ module FizzBuzz
   , fizzBuzz'
   , fizzBuzz''
   , fizzBuzz'''
+  , fizzBuzz''''
   ) where
 
 fizzBuzz :: [Int] -> [String]
@@ -60,3 +61,14 @@ toFizzBuzz fbNums fb =
   map (\a -> if getNum a `mod` (fst fb) == 0 then FBNum (getNum a) ((getMsg a) ++ (snd fb)) else FBNum (getNum a) (getMsg a)) fbNums
 toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
+
+
+fizzBuzz'''' :: [Int] -> [String]
+fizzBuzz'''' nums =
+  let judge a
+        | a `mod` 15 == 0 = "fizzbuzz"
+        | a `mod` 3 == 0 = "fizz"
+        | a `mod` 5 == 0 = "buzz"
+        | otherwise = show a
+  in
+    [ judge a | a <- nums ]
