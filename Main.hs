@@ -3,6 +3,7 @@ import FizzBuzz
 -- $ ghci
 -- ghci> :l Main.hs FizzBuzz.hs
 -- ghci> main
+main :: IO()
 main = do
   let max = 50
       nums = [0..max]
