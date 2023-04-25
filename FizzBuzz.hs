@@ -10,8 +10,8 @@ module FizzBuzz
 fizzBuzz :: [Int] -> [String]
 fizzBuzz nums =
   let fizzBuzzNums = [a | a <- fizz nums, b <- buzz nums, a == b] -- [0,15,30,45]
-      fizzNums = [a | a <- fizz nums] -- [3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48]
-      buzzNums = [a | a <- buzz nums] -- [5,10,15,20,25,30,35,40,45,50]
+      fizzNums = [a | a <- fizz nums] -- [0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48]
+      buzzNums = [a | a <- buzz nums] -- [0,5,10,15,20,25,30,35,40,45,50]
       judge a
         | a `elem` fizzBuzzNums = "fizzbuzz"
         | a `elem` fizzNums = "fizz"
