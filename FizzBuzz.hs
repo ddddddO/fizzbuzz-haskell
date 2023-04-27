@@ -33,12 +33,20 @@ fizzBuzz' nums =
 --
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
-  let fizzBuzz = zipFizzBuzz (zipFizzBuzz (zip nums (cycle [""])) (3, "fizz")) (5, "buzz")
+  let fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
       judge msg num
         | msg == "" = show num
         | otherwise = msg
   in
     map (\(num, msg) -> judge msg num) fizzBuzz
+
+recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
+recursive src fbs =
+  let recr
+        | null fbs = src
+        | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
+  in
+    recr
 
 zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
 zipFizzBuzz numTupls fb =
