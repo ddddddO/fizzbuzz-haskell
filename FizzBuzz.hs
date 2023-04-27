@@ -41,12 +41,9 @@ fizzBuzz'' nums =
     map (\(num, msg) -> judge msg num) fizzBuzz
 
 recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
-recursive src fbs =
-  let recr
-        | null fbs = src
-        | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
-  in
-    recr
+recursive src fbs
+  | null fbs = src
+  | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
 
 zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
 zipFizzBuzz numTupls fb =
