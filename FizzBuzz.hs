@@ -64,10 +64,10 @@ toFizzBuzz fbNums fb =
   map (\(FBNum num msg) -> genFBNum num msg) fbNums
   where (fbNum, fbMsg) = fb
         genFBNum num msg
-          | num `mod` fbNum == 0 = FBNum num (msg ++ fbMsg)
+          | num `mod` fbNum == 0 = FBNum num $ msg ++ fbMsg
           | otherwise = FBNum num msg
 toStrings :: [FBNum] -> [String]
-toStrings fbNums = map (\a -> show a) fbNums
+toStrings fbNums = map show fbNums
 
 
 --
