@@ -53,7 +53,7 @@ fizzBuzz'' nums =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  toStrings $ toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz")
+  map show $ toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz")
 
 data FBNum = FBNum Int String
 instance Show FBNum where
@@ -66,8 +66,6 @@ toFizzBuzz fbNums fb =
         genFBNum num msg
           | num `mod` fbNum == 0 = FBNum num $ msg ++ fbMsg
           | otherwise            = FBNum num msg
-toStrings :: [FBNum] -> [String]
-toStrings fbNums = map show fbNums
 
 
 --
@@ -76,6 +74,6 @@ fizzBuzz'''' nums =
   [ judge a | a <- nums ]
   where judge a
           | a `mod` 15 == 0 = "fizzbuzz"
-          | a `mod` 3 == 0  = "fizz"
-          | a `mod` 5 == 0  = "buzz"
+          | a `mod` 3  == 0 = "fizz"
+          | a `mod` 5  == 0 = "buzz"
           | otherwise       = show a
