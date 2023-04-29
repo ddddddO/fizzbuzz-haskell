@@ -33,12 +33,7 @@ fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   map (\(num, msg) -> judge msg num) fizzBuzz
   where
-    fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
-
-    recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
-    recursive src fbs
-      | null fbs = src
-      | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
+    fizzBuzz = foldl (\acc x -> zipFizzBuzz acc x) (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
 
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
