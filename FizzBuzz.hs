@@ -31,10 +31,10 @@ fizzBuzz' nums =
 --
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
-  map (\(num, msg) -> judge msg num) fizzBuzz
+  map (\(num, msg) -> case msg of ""        -> show num
+                                  otherwise -> msg
+      ) $ foldl zipFizzBuzz (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
   where
-    fizzBuzz = foldl zipFizzBuzz (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
-
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
       map (\(num, msg) -> (num, msg ++ message num)) numTupls
@@ -43,11 +43,6 @@ fizzBuzz'' nums =
         message num
           | num `mod` fbNum == 0 = fbMsg
           | otherwise            = ""
-
-    judge :: String -> Int -> String
-    judge msg num
-      | msg == "" = show num
-      | otherwise = msg
 
 
 --
