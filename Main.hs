@@ -35,7 +35,7 @@ test rets = do
   print "----------------"
 
   print (
-          let result = (length passed) == (length rets - 1); in case result of
+          let succeeded = (length passed) == (length rets - 1); in case succeeded of
                 True -> "Ok!"
                 False -> "Fail..."
         )
