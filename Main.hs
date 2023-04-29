@@ -34,12 +34,12 @@ test rets = do
   print "      Test      "
   print "----------------"
 
-  print (judge (length passed) (length rets - 1))
-
+  print (
+          let result = (length passed) == (length rets - 1); in case result of
+                True -> "Ok!"
+                False -> "Fail..."
+        )
   where passed = filter (==True) (zipWith (\a -> \b -> a == b) (init rets) (tail rets))
-        judge actual expected
-          | actual == expected = "Ok!"
-          | otherwise = "Fail..."
 
 
 -- etc
