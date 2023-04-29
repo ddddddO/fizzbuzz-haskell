@@ -36,25 +36,24 @@ fizzBuzz'' nums =
   let fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
   in
     map (\(num, msg) -> judge msg num) fizzBuzz
+  where
+    recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
+    recursive src fbs
+      | null fbs = src
+      | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
 
-  where 
-        recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
-        recursive src fbs
-          | null fbs = src
-          | otherwise = recursive (zipFizzBuzz src (head fbs)) (tail fbs)
+    zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
+    zipFizzBuzz numTupls fb =
+      map (\(num, msg) -> (num, msg ++ judge num)) numTupls
+      where (fbNum, fbMsg) = fb
+            judge num
+              | num `mod` fbNum == 0 = fbMsg
+              | otherwise = ""
 
-        zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
-        zipFizzBuzz numTupls fb =
-          map (\(num, msg) -> (num, msg ++ judge num)) numTupls
-          where (fbNum, fbMsg) = fb
-                judge num
-                  | num `mod` fbNum == 0 = fbMsg
-                  | otherwise = ""
-
-        judge :: String -> Int -> String
-        judge msg num
-          | msg == "" = show num
-          | otherwise = msg
+    judge :: String -> Int -> String
+    judge msg num
+      | msg == "" = show num
+      | otherwise = msg
 
 
 --
@@ -68,12 +67,11 @@ instance Show FBNum where
   show (FBNum _ msg)  = msg
 toFizzBuzz :: [FBNum] -> (Int, String) -> [FBNum]
 toFizzBuzz fbNums fb =
-  let (fbNum, fbMsg) = fb
-      genFBNum num msg
-        | num `mod` fbNum == 0 = FBNum num (msg ++ fbMsg)
-        | otherwise = FBNum num msg
-  in
-    map (\(FBNum num msg) -> genFBNum num msg) fbNums
+  map (\(FBNum num msg) -> genFBNum num msg) fbNums
+  where (fbNum, fbMsg) = fb
+        genFBNum num msg
+          | num `mod` fbNum == 0 = FBNum num (msg ++ fbMsg)
+          | otherwise = FBNum num msg
 toStrings :: [FBNum] -> [String]
 toStrings fbNums = map (\a -> show a) fbNums
 
