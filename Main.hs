@@ -33,13 +33,13 @@ test rets = do
   print "----------------"
   print "      Test      "
   print "----------------"
-  
-  let passed = filter (==True) (zipWith (\a -> \b -> a == b) (init rets) (tail rets))
-      judge actual expected
-        | actual == expected = "Ok!"
-        | otherwise = "Fail..."
 
   print (judge (length passed) (length rets - 1))
+
+  where passed = filter (==True) (zipWith (\a -> \b -> a == b) (init rets) (tail rets))
+        judge actual expected
+          | actual == expected = "Ok!"
+          | otherwise = "Fail..."
 
 
 -- etc
