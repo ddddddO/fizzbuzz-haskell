@@ -17,9 +17,7 @@ fizzBuzz nums =
         | a `elem` fizzNums = "fizz"
         | a `elem` buzzNums = "buzz"
         | otherwise = show a
-  in
-    [ judge a | a <- nums ]
-
+  in [ judge a | a <- nums ]
   where fizz nums = [a | a <- nums, a `mod` 3 == 0]
         buzz nums = [a | a <- nums, a `mod` 5 == 0]
 
@@ -33,10 +31,10 @@ fizzBuzz' nums =
 --
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
-  let fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
-  in
-    map (\(num, msg) -> judge msg num) fizzBuzz
+  map (\(num, msg) -> judge msg num) fizzBuzz
   where
+    fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
+
     recursive :: [(Int, String)] -> [(Int, String)] -> [(Int, String)]
     recursive src fbs
       | null fbs = src
@@ -44,11 +42,12 @@ fizzBuzz'' nums =
 
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
-      map (\(num, msg) -> (num, msg ++ judge num)) numTupls
-      where (fbNum, fbMsg) = fb
-            judge num
-              | num `mod` fbNum == 0 = fbMsg
-              | otherwise = ""
+      map (\(num, msg) -> (num, msg ++ message num)) numTupls
+      where
+        (fbNum, fbMsg) = fb
+        message num
+          | num `mod` fbNum == 0 = fbMsg
+          | otherwise = ""
 
     judge :: String -> Int -> String
     judge msg num
