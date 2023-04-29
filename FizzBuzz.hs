@@ -53,7 +53,7 @@ fizzBuzz'' nums =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  map show $ toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz")
+  map show $ foldl toFizzBuzz (map (\a -> FBNum a "") nums) [(3, "fizz"), (5, "buzz")]
 
 data FBNum = FBNum Int String
 instance Show FBNum where
