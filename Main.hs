@@ -33,7 +33,7 @@ test rets = do
 
   print (
           let succeeded = (length passed) == (length rets - 1); in case succeeded of
-                True -> "Ok!"
+                True  -> "Ok!"
                 False -> "Fail..."
         )
   where passed = filter (==True) $ zipWith (==) (init rets) (tail rets)
