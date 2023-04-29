@@ -45,3 +45,9 @@ test rets = do
 -- etc
 square nums = map (\a -> a*a) nums
 square' nums = [a^2 | a <- nums]
+
+max4 = max 4
+-- ghci> max4 5
+-- 5
+-- ghci> max4 3
+-- 4
