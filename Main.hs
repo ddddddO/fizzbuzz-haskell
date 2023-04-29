@@ -39,7 +39,7 @@ test rets = do
                 True -> "Ok!"
                 False -> "Fail..."
         )
-  where passed = filter (==True) (zipWith (\a -> \b -> a == b) (init rets) (tail rets))
+  where passed = filter (==True) $ zipWith (\a -> \b -> a == b) (init rets) (tail rets)
 
 
 -- etc

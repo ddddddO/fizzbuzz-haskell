@@ -33,7 +33,7 @@ fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   map (\(num, msg) -> judge msg num) fizzBuzz
   where
-    fizzBuzz = foldl (\acc x -> zipFizzBuzz acc x) (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
+    fizzBuzz = foldl (\acc x -> zipFizzBuzz acc x) (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
 
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
@@ -53,7 +53,7 @@ fizzBuzz'' nums =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  toStrings (toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz"))
+  toStrings $ toFizzBuzz (toFizzBuzz (map (\a -> FBNum a "") nums) (3, "fizz")) (5, "buzz")
 
 data FBNum = FBNum Int String
 instance Show FBNum where
