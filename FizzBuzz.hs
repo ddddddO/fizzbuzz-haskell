@@ -34,9 +34,6 @@ fizzBuzz' nums =
 fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   let fizzBuzz = recursive (zip nums (cycle [""])) [(3, "fizz"), (5, "buzz")]
-      judge msg num
-        | msg == "" = show num
-        | otherwise = msg
   in
     map (\(num, msg) -> judge msg num) fizzBuzz
 
@@ -53,6 +50,11 @@ fizzBuzz'' nums =
                 judge num
                   | num `mod` fbNum == 0 = fbMsg
                   | otherwise = ""
+
+        judge :: String -> Int -> String
+        judge msg num
+          | msg == "" = show num
+          | otherwise = msg
 
 
 --
