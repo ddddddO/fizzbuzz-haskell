@@ -49,3 +49,6 @@ max4 = max 4
 -- 5
 -- ghci> max4 3
 -- 4
+
+composition = replicate 2 . product . map (*3) $ zipWith max [1, 2] [4, 5]
+testComp = composition == (replicate 2 (product (map (*3) (zipWith max [1, 2] [4, 5]))))
