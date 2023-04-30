@@ -1,8 +1,10 @@
+module Main (main) where
+
 import FizzBuzz
 
 -- $ ghci
--- ghci> :l Main.hs FizzBuzz.hs
--- ghci> main
+-- ghci> :l FBNum.hs FizzBuzz.hs Main.hs
+-- ghci> Main.main
 main :: IO()
 main = do
   let max = 50

@@ -6,6 +6,8 @@ module FizzBuzz
   , fizzBuzz''''
   ) where
 
+import qualified FBNum as FB
+
 --
 fizzBuzz :: [Int] -> [String]
 fizzBuzz nums =
@@ -48,19 +50,7 @@ fizzBuzz'' nums =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  map show $ foldl toFizzBuzz (map (\a -> FBNum a "") nums) [(3, "fizz"), (5, "buzz")]
-
-data FBNum = FBNum Int String
-instance Show FBNum where
-  show (FBNum num "") = show num
-  show (FBNum _ msg)  = msg
-toFizzBuzz :: [FBNum] -> (Int, String) -> [FBNum]
-toFizzBuzz fbNums fb =
-  map (\(FBNum num msg) -> genFBNum num msg) fbNums
-  where (fbNum, fbMsg) = fb
-        genFBNum num msg
-          | num `mod` fbNum == 0 = FBNum num $ msg ++ fbMsg
-          | otherwise            = FBNum num msg
+  map show $ foldl FB.toFizzBuzz (map (\a -> FB.FBNum a "") nums) [(3, "fizz"), (5, "buzz")]
 
 
 --
