@@ -6,6 +6,7 @@ module FizzBuzz
   , fizzBuzz''''
   ) where
 
+import qualified Data.List as L
 import qualified FBNum as FB
 
 --
@@ -35,7 +36,7 @@ fizzBuzz'' :: [Int] -> [String]
 fizzBuzz'' nums =
   map (\(num, msg) -> case msg of ""        -> show num
                                   otherwise -> msg
-      ) $ foldl zipFizzBuzz (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
+      ) $ L.foldl' zipFizzBuzz (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
   where
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
@@ -50,7 +51,7 @@ fizzBuzz'' nums =
 --
 fizzBuzz''' :: [Int] -> [String]
 fizzBuzz''' nums =
-  map show $ foldl FB.toFizzBuzz (map (\a -> FB.FBNum a "") nums) [(3, "fizz"), (5, "buzz")]
+  map show $ L.foldl' FB.toFizzBuzz (map (\a -> FB.FBNum a "") nums) [(3, "fizz"), (5, "buzz")]
 
 
 --
