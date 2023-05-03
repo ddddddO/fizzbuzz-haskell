@@ -40,7 +40,7 @@ fizzBuzz'' nums fbs =
                                   otherwise -> msg
       ) $ L.foldl' zipFizzBuzz (zip nums $ cycle [""]) fbs
   where
-    zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
+    zipFizzBuzz :: [(Int, String)] -> FBPair -> [(Int, String)]
     zipFizzBuzz numTupls fb =
       map (\(num, msg) -> (num, msg ++ message num)) numTupls
       where
