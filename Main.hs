@@ -19,7 +19,7 @@ main = do
 
   let rets = [ fizzBuzz nums
              , fizzBuzz' nums
-             , fizzBuzz'' nums
+             , fizzBuzz'' nums [(3, "fizz"), (5, "buzz")]
              , fizzBuzz''' nums
              , fizzBuzz'''' nums
              ]

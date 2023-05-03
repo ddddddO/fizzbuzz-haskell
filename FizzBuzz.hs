@@ -32,11 +32,13 @@ fizzBuzz' nums =
 
 
 --
-fizzBuzz'' :: [Int] -> [String]
-fizzBuzz'' nums =
+type FBPair = (Int, String)
+
+fizzBuzz'' :: [Int] -> [FBPair] -> [String]
+fizzBuzz'' nums fbs =
   map (\(num, msg) -> case msg of ""        -> show num
                                   otherwise -> msg
-      ) $ L.foldl' zipFizzBuzz (zip nums $ cycle [""]) [(3, "fizz"), (5, "buzz")]
+      ) $ L.foldl' zipFizzBuzz (zip nums $ cycle [""]) fbs
   where
     zipFizzBuzz :: [(Int, String)] -> (Int, String) -> [(Int, String)]
     zipFizzBuzz numTupls fb =
