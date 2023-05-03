@@ -33,10 +33,10 @@ main = do
 
 test :: [[String]] -> IO()
 test rets = do
-  mapM_ putStrLn [ "----------------"
-                 , "      Test      "
-                 , "----------------"
-                 ]
+  putStr $ unlines [ "----------------"
+                   , "      Test      "
+                   , "----------------"
+                   ]
 
   putStrLn (
           let succeeded = (length passed) == (length rets - 1); in case succeeded of
