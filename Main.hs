@@ -10,9 +10,12 @@ main = do
   let max = 50
       nums = [0..max]
 
-  putStrLn "----------------"
-  putStrLn "   Fizz Buzz!   "
-  putStrLn "----------------"
+  -- sequence $ map putStrLn
+  -- mapM putStrLn
+  mapM_ putStrLn [ "----------------"
+                 , "   Fizz Buzz!   "
+                 , "----------------"
+                 ]
 
   let rets = [ fizzBuzz nums
              , fizzBuzz' nums
@@ -30,9 +33,10 @@ main = do
 
 test :: [[String]] -> IO()
 test rets = do
-  putStrLn "----------------"
-  putStrLn "      Test      "
-  putStrLn "----------------"
+  mapM_ putStrLn [ "----------------"
+                 , "      Test      "
+                 , "----------------"
+                 ]
 
   putStrLn (
           let succeeded = (length passed) == (length rets - 1); in case succeeded of
