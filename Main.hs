@@ -84,3 +84,12 @@ treeElem x (Node a left right)
 -- True
 -- ghci> 100 `treeElem` numsTree
 -- False
+
+--
+myPutStr :: String -> IO ()
+myPutStr [] = return ()
+myPutStr (x:xs) = do
+  putChar x
+  myPutStr xs
+-- ghci> myPutStr "hellow!!"
+-- hellow!!ghci>
