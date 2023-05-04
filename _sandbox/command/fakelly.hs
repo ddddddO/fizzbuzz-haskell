@@ -1,8 +1,21 @@
+import System.Environment
 import System.Directory
 
-main :: IO()
+command :: String -> String -> IO ()
+command "ls" = ls'
+command "tree" = tree
+command undefined = \_ -> putStrLn $ "'" ++ undefined ++ "'" ++ " is not implemented."
+
+-- ghc --make fakelly
+main :: IO ()
 main = do
-  dirs <- ls "../../."
+  (cmd:args) <- getArgs
+  command cmd $ head args
+
+
+ls' :: String -> IO ()
+ls' dir = do
+  dirs <- ls dir
   mapM_ putStrLn dirs
 
 ls :: String -> IO [String]
