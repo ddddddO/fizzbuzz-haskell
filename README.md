@@ -1,6 +1,6 @@
 # fizzbuzz-haskell
 
-## FizzBuzz Server を作るまで
+## [中断] FizzBuzz Server を作るまで
 - プロジェクトルートで、`stack new server servant` を実行し、`server` ディレクトリ生成。色々デフォで生成された。
   - https://docs.servant.dev/en/stable/tutorial/install.html#stack
 
